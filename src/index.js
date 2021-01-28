@@ -87,7 +87,7 @@ function* putGif(action) {
     } catch (error) {
         console.log('error in put')
     }
-}
+}; //end putGif
 
 
 
