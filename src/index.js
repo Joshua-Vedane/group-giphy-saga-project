@@ -96,12 +96,23 @@ function* putGif(action) {
   }
 } //end putGif
 
+function* deleteFav(action) {
+    try {
+        const favId = action.payload
+        yield axios.delete(`/api/favorite/${favId}`)
+        yield put({ type: 'FETCH_GIF' })
+    } catch (error) {
+        console.log('error in deleting gif', error)
+    }
+}
+
 //saga watcher
 function* watcherSaga() {
   yield takeEvery('FETCH_GIF', fetchGif);
   yield takeEvery('POST_GIF', postGif);
   yield takeEvery('POST_SEARCH', postSearch);
   yield takeEvery('PUT_GIF', putGif);
+  yield takeEvery('DELETE_FAV', deleteFav);
 } //end watcherSaga
 
 // middleware and storeInstance
