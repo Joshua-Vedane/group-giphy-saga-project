@@ -59,7 +59,7 @@ function* fetchGif() {
         console.log('fetch the GIF')
 
         const response = yield axios.get('/api/favorite')
-        yield put({ type:'', payload: response.data })
+        yield put({ type:'FAVORITE_GIF', payload: response.data })
     } catch (error) {
         console.log('error in getting the GIF')
     }
