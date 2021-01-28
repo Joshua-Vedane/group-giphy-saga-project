@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import SearchForm from '../SearchForm/SearchForm';
 import SearchList from '../SearchList/SearchList';
 import FavoritesList from '../FavoritesList/FavoritesList';
