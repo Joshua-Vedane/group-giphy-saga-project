@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
-function SearchItem() {
+function SearchItem({ entry }) {
   const [faved, setFaved] = useState(false);
   const dispatch = useDispatch();
 
