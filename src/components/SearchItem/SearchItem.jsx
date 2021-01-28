@@ -12,14 +12,14 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     maxWidth: 345,
+//   },
+//   media: {
+//     height: 140,
+//   },
+// });
 
 function SearchItem() {
   const [faved, setFaved] = useState(false);
