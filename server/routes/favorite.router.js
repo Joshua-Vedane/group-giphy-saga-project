@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
   const newFavorite = req.body;
   const queryText = `INSERT INTO "favorites" ("image_url") 
                      VALUES($1);`;
-  pool.query(queryText, newFavorite.image_url)
+  pool.query(queryText, [newFavorite.image_url])
   .then((result) => {
     res.sendStatus(201);
   }).catch((error) => {
