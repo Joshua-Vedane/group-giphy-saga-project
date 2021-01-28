@@ -1,5 +1,5 @@
 # NPM
-  [ ] install packages
+  [x] install packages
     [x] react-router-dom
     [x] react-redux
     [x] redux
