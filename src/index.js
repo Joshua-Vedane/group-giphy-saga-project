@@ -87,7 +87,7 @@ function* putGif(action) {
     } catch (error) {
         console.log('error in put')
     }
-}
+}; //end putGif
 
 
 
@@ -98,6 +98,7 @@ function* putGif(action) {
 function* watcherSaga() {
     yield takeEvery('FETCH_GIF', fetchGif);
     yield takeEvery('POST_GIF', postGif);
+    yield takeEvery('PUT_GIF', putGif);
 
 }; //end watcherSaga
 
