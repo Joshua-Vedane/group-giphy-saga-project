@@ -7,11 +7,11 @@ function SearchList() {
   const searchResults = useSelector((state) => state.searchReducer);
 
   return (
-    <Grid container>
+    <Grid container spacing={4} justify="center">
       {searchResults.map((entry) => {
         return (
-          <Grid item>
-            <SearchItem key={entry.id} entry={entry} />
+          <Grid key={entry.id} item>
+            <SearchItem entry={entry} />
           </Grid>
         );
       })}
