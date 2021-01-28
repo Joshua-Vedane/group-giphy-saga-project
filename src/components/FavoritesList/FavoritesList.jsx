@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography, Card, Grid, Paper } from '@material-ui/core';
 import FavoritesItem from '../FavoritesItem/FavoritesItem';
 
