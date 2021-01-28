@@ -14,12 +14,13 @@ import { Favorite, FavoriteBorder } from '@material-ui/icons';
 function FavoritesItem({entry}) {
   const dispatch = useDispatch();
   let gif = entry.image_url;
+  console.log('logging entry', entry);
   const handleFavorite = () => {
     console.log('clicked handleFavorite');
   };
 
   return (
-    <Card>
+    <Card key={entry.id}>
       <CardActionArea>
       <img src={`${gif}`}/>
       </CardActionArea>
