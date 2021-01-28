@@ -11,10 +11,15 @@ function SearchForm() {
 
   const submitSearch = (event) => {
     event.preventDefault();
+<<<<<<< HEAD
     console.log('clicked');
     dispatch({ type: 'POST_SEARCH', payload: search });
     setSearch('');
     history.push('/search');
+=======
+    console.log('Searching for', search);
+    
+>>>>>>> 0f004b2e784605414bd6a18eb07c22687749157a
   };
 
   return (
