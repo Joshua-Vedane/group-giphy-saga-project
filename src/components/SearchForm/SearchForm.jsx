@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Box, Typography, TextField, Button, Divider } from '@material-ui/core';
-import { ArrowForward } from '@material-ui/icons';
+import { ArrowForward, FavoriteBorder } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 function SearchForm() {
@@ -11,10 +11,13 @@ function SearchForm() {
 
   const submitSearch = (event) => {
     event.preventDefault();
-    console.log('clicked');
     dispatch({ type: 'POST_SEARCH', payload: search });
     setSearch('');
     history.push('/search');
+  };
+
+  const sendToFavorites = () => {
+    history.push('/favorites');
   };
 
   return (
@@ -36,7 +39,7 @@ function SearchForm() {
                 onChange={(event) => setSearch(event.target.value)}
               />
             </Box>
-            <Box mx={2} width="20%">
+            <Box mx={2} width="10%">
               <Button
                 type="submit"
                 variant="contained"
@@ -44,6 +47,16 @@ function SearchForm() {
                 endIcon={<ArrowForward />}
               >
                 Search
+              </Button>
+            </Box>
+            <Box marginLeft={3} width="10%">
+              <Button
+                variant="contained"
+                color="secondary"
+                endIcon={<FavoriteBorder />}
+                onClick={sendToFavorites}
+              >
+                Favorites
               </Button>
             </Box>
           </Box>
