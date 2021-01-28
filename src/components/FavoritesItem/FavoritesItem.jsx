@@ -4,15 +4,13 @@ import {
   Box,
   Card,
   CardActionArea,
-  CardMedia,
   CardActions,
   IconButton,
   Button,
 } from '@material-ui/core';
-import { Favorite, FavoriteBorder } from '@material-ui/icons';
+import { AddCircle, DeleteOutlineIcon } from '@material-ui/icons';
 
-
-function FavoritesItem({entry}) {
+function FavoritesItem({ entry }) {
   const dispatch = useDispatch();
   console.log(entry.image_url);
   const handleFavorite = () => {
@@ -20,20 +18,48 @@ function FavoritesItem({entry}) {
   };
 
   return (
-    <Card>
+    <Card elevation={4}>
       <CardActionArea>
-      <img src={`${entry.image_url}`}/>
-      </CardActionArea>
-      <CardActions>
-        <Box display="flex" justifyContent="center">
-          <p>Categories go here!</p>
-          <Button variant="contained" onClick={handleFavorite}>
-            Add category
-          </Button>
+        <Box p={2}>
+          <img src={entry.image_url} />
         </Box>
-      </CardActions>
+      </CardActionArea>
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <CardActions>
+          <Button
+            variant="contained"
+            onClick={handleFavorite}
+            endIcon={<AddCircle />}
+          >
+            Add
+          </Button>
+        </CardActions>
+      </Box>
     </Card>
   );
+}
+
+{
+  /* <Card elevation={4}>
+  <CardActionArea>
+    <Box p={2}>
+      <img src={entry.image_url} />
+    </Box>
+  </CardActionArea>
+  <Box display="flex" justifyContent="center" alignItems="center">
+    <CardActions>
+      {!faved ? (
+        <IconButton onClick={handleFavorite}>
+          <FavoriteBorder />
+        </IconButton>
+      ) : (
+        <IconButton>
+          <Favorite color="secondary" />
+        </IconButton>
+      )}
+    </CardActions>
+  </Box>
+</Card>; */
 }
 
 export default FavoritesItem;
