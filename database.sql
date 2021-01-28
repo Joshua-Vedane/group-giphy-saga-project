@@ -11,4 +11,16 @@ CREATE TABLE "category" (
 
 -- Default categories. You may change them :)
 INSERT INTO "category" ("name")
-VALUES ('funny'), ('cohort'), ('cartoon'), ('nsfw'), ('meme');
+VALUES ('funny'), ('odd'), ('cartoon'), ('spicy'), ('meme');
+
+
+-- Favorite table
+CREATE TABLE "favorites" (
+    "id" SERIAL PRIMARY KEY,
+    "image_url" TEXT,
+    "category_id" INT REFERENCES "category"
+);
+
+-- Sample table entry
+INSERT INTO "favorites" ("image_url", "category_id")
+VALUES ('https://media.giphy.com/media/HgtCxKvJZ7Wi4/giphy.gif', 2);
