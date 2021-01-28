@@ -5,7 +5,7 @@ import FavoritesItem from '../FavoritesItem/FavoritesItem';
 function FavoritesList() {
   const dispatch = useDispatch();
   // useSelector to get reducer in index.js
-  const favorites = useSelector((state) => state.favoritesReducer);
+  const favorites = useSelector((state) => state.favoriteReducer);
 
   return (
     <Grid container>
