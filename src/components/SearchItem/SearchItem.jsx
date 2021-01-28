@@ -17,7 +17,7 @@ function SearchItem({ entry }) {
   const handleFavorite = () => {
     console.log('clicked handleFavorite');
     setFaved(true);
-    dispatch({type: 'POST_GIF', payload: {image_url: image}})
+    dispatch({ type: 'POST_GIF', payload: { image_url: image } });
   };
 
   return (
@@ -29,9 +29,15 @@ function SearchItem({ entry }) {
       </CardActionArea>
       <Box display="flex" justifyContent="center" alignItems="center">
         <CardActions>
-          <IconButton onClick={handleFavorite}>
-            {faved ? <Favorite color="secondary" /> : <FavoriteBorder />}
-          </IconButton>
+          {!faved ? (
+            <IconButton onClick={handleFavorite}>
+              <FavoriteBorder />
+            </IconButton>
+          ) : (
+            <IconButton>
+              <Favorite color="secondary" />
+            </IconButton>
+          )}
         </CardActions>
       </Box>
     </Card>
