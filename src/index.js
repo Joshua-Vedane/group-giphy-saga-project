@@ -21,7 +21,28 @@ import App from './components/App/App';
 
 
 //generator functions
+function* fetchGif() {
+    try {
+        console.log('fetch the GIF')
 
+        const response = yield axios.get('/api/favorite')
+        yield put({ type:'', payload: response.data })
+    } catch (error) {
+        console.log('error in getting the GIF')
+    }
+}; //end fetchGif
+
+function* postGif(action) {
+    try {
+        console.log('post the GIF')
+
+        const newGif = action.payload;
+        yield axios.post('/api/favorite', newGif)
+        yield put({ type: 'FETCH_GIF' })
+    } catch (error) {
+        console.log('error in post')
+    }
+}; //end postGif
 
 
 
@@ -30,6 +51,8 @@ import App from './components/App/App';
 
 //saga watcher
 function* watcherSaga() {
+    yield takeEvery('FETCH_GIF', fetchGif);
+    yield takeEvery('POST_GIF', postGif);
 
 }; //end watcherSaga
 
