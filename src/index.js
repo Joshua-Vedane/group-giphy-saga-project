@@ -54,7 +54,40 @@ const categoryReducer = (state = [], action) => {
 
 
 //generator functions
+function* fetchGif() {
+    try {
+        console.log('fetch the GIF')
 
+        const response = yield axios.get('/api/favorite')
+        yield put({ type:'', payload: response.data })
+    } catch (error) {
+        console.log('error in getting the GIF')
+    }
+}; //end fetchGif
+
+function* postGif(action) {
+    try {
+        console.log('post the GIF')
+
+        const newGif = action.payload;
+        yield axios.post('/api/favorite', newGif)
+        yield put({ type: 'FETCH_GIF' })
+    } catch (error) {
+        console.log('error in post')
+    }
+}; //end postGif
+
+function* putGif(action) {
+    try {
+        const gifId = action.payload.id
+        const category = action.payload.category
+        yield axios.put(`/api/favorite/${gifId}`, {category: category})
+        yield put({ type: 'FETCH_GIF'})
+
+    } catch (error) {
+        console.log('error in put')
+    }
+}
 
 
 
@@ -63,6 +96,8 @@ const categoryReducer = (state = [], action) => {
 
 //saga watcher
 function* watcherSaga() {
+    yield takeEvery('FETCH_GIF', fetchGif);
+    yield takeEvery('POST_GIF', postGif);
 
 }; //end watcherSaga
 
