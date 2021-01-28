@@ -109,7 +109,9 @@ const sagaMiddleware = createSagaMiddleware();
 
 const storeInstance = createStore(
     combineReducers({
-
+        searchReducer,
+        favoriteReducer,
+        categoryReducer
 
     }),
     applyMiddleware(sagaMiddleware, logger),
