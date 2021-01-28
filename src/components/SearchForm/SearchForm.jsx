@@ -9,7 +9,8 @@ function SearchForm() {
 
   const submitSearch = (event) => {
     event.preventDefault();
-    console.log('clicked');
+    console.log('Searching for', search);
+    
   };
 
   return (

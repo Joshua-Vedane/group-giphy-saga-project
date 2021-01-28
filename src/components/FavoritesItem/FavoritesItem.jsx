@@ -11,9 +11,10 @@ import {
 } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
+
 function FavoritesItem({entry}) {
   const dispatch = useDispatch();
-
+  console.log(entry.image_url);
   const handleFavorite = () => {
     console.log('clicked handleFavorite');
   };
@@ -21,7 +22,7 @@ function FavoritesItem({entry}) {
   return (
     <Card>
       <CardActionArea>
-        <CardMedia image={entry.image} />
+      <img src={`${entry.image_url}`}/>
       </CardActionArea>
       <CardActions>
         <Box display="flex" justifyContent="center">
