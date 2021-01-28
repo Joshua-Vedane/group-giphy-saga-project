@@ -10,8 +10,8 @@ import axios from 'axios';
 import App from './components/App/App';
 
 const startingFav = [
-    {image_url: https://media.giphy.com/media/HgtCxKvJZ7Wi4/giphy.gif}
-]
+    {image_url: "https://media.giphy.com/media/HgtCxKvJZ7Wi4/giphy.gif"}
+];
 
 
 
@@ -82,4 +82,4 @@ const storeInstance = createStore(
 
 sagaMiddleware.run(watcherSaga);
 
-ReactDOM.render(<Provider store={storeInstance}> <App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
