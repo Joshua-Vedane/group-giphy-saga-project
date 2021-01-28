@@ -11,18 +11,18 @@ import {
 } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
-
 function FavoritesItem({entry}) {
   const dispatch = useDispatch();
-  console.log(entry.image_url);
+  let gif = entry.image_url;
+  console.log('logging entry', entry);
   const handleFavorite = () => {
     console.log('clicked handleFavorite');
   };
 
   return (
-    <Card>
+    <Card key={entry.id}>
       <CardActionArea>
-      <img src={`${entry.image_url}`}/>
+      <img src={`${gif}`}/>
       </CardActionArea>
       <CardActions>
         <Box display="flex" justifyContent="center">
