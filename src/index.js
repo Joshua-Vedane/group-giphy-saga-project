@@ -22,7 +22,7 @@ const startingFav = [
 
 const searchReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SEARCH_GIPHY' :
+      case 'FETCH_SEARCH' :
         return action.payload
       default:
         return state;
@@ -74,9 +74,22 @@ function* postGif(action) {
         yield axios.post('/api/favorite', newGif)
         yield put({ type: 'FETCH_GIF' })
     } catch (error) {
-        console.log('error in post')
+        console.log('error in postGif')
     }
 }; //end postGif
+
+function* postSearch(action) {
+    try {
+        console.log('post Search');
+
+        const newSearch = action.payload;
+        const response = yield axios.post('/api/giphy', { newSearch })
+        yield put({ type: 'FETCH_SEARCH', payload: response.data })
+
+    } catch (error) {
+        console.log('error in postSearch')
+    }
+}; //end postSearch
 
 function* putGif(action) {
     try {
@@ -88,7 +101,7 @@ function* putGif(action) {
     } catch (error) {
         console.log('error in put')
     }
-}
+}; //end putGif
 
 
 
@@ -99,6 +112,8 @@ function* putGif(action) {
 function* watcherSaga() {
     yield takeEvery('FETCH_GIF', fetchGif);
     yield takeEvery('POST_GIF', postGif);
+    yield takeEvery('POST_SEARCH', postSearch);
+    yield takeEvery('PUT_GIF', putGif);
 
 }; //end watcherSaga
 

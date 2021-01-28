@@ -11,8 +11,7 @@ import {
 } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
-function FavoritesItem({ entry }) {
-  // const classes = useStyles();
+function FavoritesItem({entry}) {
   const dispatch = useDispatch();
   console.log(entry.image_url);
   const handleFavorite = () => {

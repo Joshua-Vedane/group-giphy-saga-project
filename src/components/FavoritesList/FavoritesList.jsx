@@ -21,7 +21,7 @@ function FavoritesList() {
         );
       })}
       <div>
-        
+
       </div>
     </Grid>
   );
