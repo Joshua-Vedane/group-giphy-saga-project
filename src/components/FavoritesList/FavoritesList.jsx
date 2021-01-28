@@ -6,6 +6,7 @@ function FavoritesList() {
   const dispatch = useDispatch();
   // useSelector to get reducer in index.js
   const favorites = useSelector((state) => state.favoriteReducer);
+
   const image = favorites[1].image_url
 
   console.log(favorites);
