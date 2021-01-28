@@ -10,14 +10,8 @@ import axios from 'axios';
 import App from './components/App/App';
 
 const startingFav = [
-<<<<<<< HEAD
   { image_url: 'https://media.giphy.com/media/HgtCxKvJZ7Wi4/giphy.gif' },
 ];
-=======
-    {image_url: "https://media.giphy.com/media/HgtCxKvJZ7Wi4/giphy.gif"},
-    {image_url: "https://media.giphy.com/media/3JgtnXdRhSflK/giphy.gif"}
-    ];
->>>>>>> 0f004b2e784605414bd6a18eb07c22687749157a
 
 //reducers
 
@@ -35,7 +29,6 @@ const searchReducer = (state = [], action) => {
 //-- Fav reducer
 //  '/api/favorite'
 const favoriteReducer = (state = startingFav, action) => {
-<<<<<<< HEAD
   switch (action.type) {
     case 'FAVORITE_GIF':
       return action.payload;
@@ -43,15 +36,6 @@ const favoriteReducer = (state = startingFav, action) => {
       return state;
   }
 };
-=======
-    switch (action.type) {
-      case 'FAVORITE_GIF' :
-        return [...state, action.payload]
-      default:
-        return state;
-    }
-  };
->>>>>>> 0f004b2e784605414bd6a18eb07c22687749157a
 
 //-- Category reducer
 //  '/api/category'
