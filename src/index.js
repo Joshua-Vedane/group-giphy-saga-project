@@ -46,6 +46,20 @@ const categoryReducer = (state = [], action) => {
 };
 
 //generator functions
+
+function* getCategories(){
+    try {
+        const response = yield axios.get('./routes/category.router');
+        console.log('Getting categories', response);
+        
+        
+        
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
 function* fetchGif() {
   try {
     console.log('fetch the GIF');
