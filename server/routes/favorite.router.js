@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   const queryText = `SELECT "favorites".id, "favorites".image_url, "category".name 
                     FROM "favorites"
                     LEFT JOIN "category" ON "favorites".category_id = "category".id
-                    ORDER BY "favorites".id;`;
+                    ORDER BY "favorites".id DESC;`;
   pool.query(queryText)
     .then((result) => {
       console.log(result.rows);

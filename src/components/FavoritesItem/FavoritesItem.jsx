@@ -36,8 +36,6 @@ function FavoritesItem({ entry }) {
   };
 
   const addCategoryToGif = (categoryId) => {
-    
-    // setCategory(clickedText);
     dispatch({
       type: 'PUT_GIF',
       payload: { categoryId: categoryId, id: entry.id },
@@ -58,9 +56,8 @@ function FavoritesItem({ entry }) {
     console.log('in addNewCategory');
     dispatch({ type: 'POST_CATEGORY', payload: newCategory });
     setDialogOpen(false);
+    setNewCategory('');
   };
-
-  
 
   return (
     <>
@@ -114,10 +111,23 @@ function FavoritesItem({ entry }) {
             onChange={(event) => setNewCategory(event.target.value)}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
-          <Button onClick={addNewCategory}>Add</Button>
-        </DialogActions>
+        <Box display="flex" justifyContent="center">
+          <DialogActions>
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={() => {
+                setDialogOpen(false);
+                setNewCategory('');
+              }}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" variant="outlined" onClick={addNewCategory}>
+              Add
+            </Button>
+          </DialogActions>
+        </Box>
       </Dialog>
     </>
   );
