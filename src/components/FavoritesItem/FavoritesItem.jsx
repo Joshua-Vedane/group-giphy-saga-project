@@ -33,6 +33,11 @@ function FavoritesItem({ entry }) {
     setAnchorEl(event.currentTarget);
   };
 
+  const addNewCategory = () => {
+    console.log('in addNewCategory');
+    dispatch({ type: 'ADD_CATEGORY', payload: newCategoryName });
+  };
+
   return (
     <Card elevation={4}>
       <CardActionArea>
