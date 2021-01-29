@@ -35,10 +35,6 @@ function FavoritesItem({ entry }) {
     setAnchorEl(null);
   };
 
-  const addNewCategory = () => {
-    console.log('clicked!');
-  };
-
   const addCategoryToGif = (clickedText) => {
     // setCategory(clickedText);
     dispatch({
@@ -56,6 +52,14 @@ function FavoritesItem({ entry }) {
   const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const addNewCategory = () => {
+    console.log('in addNewCategory');
+    dispatch({ type: 'ADD_CATEGORY', payload: newCategoryName });
+    setDialogOpen(false);
+  };
+
+  useEffect(() => dispatch({ type: 'GET_CATEGORIES' }), []);
 
   return (
     <>
