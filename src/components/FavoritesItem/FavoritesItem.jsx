@@ -56,6 +56,7 @@ function FavoritesItem({ entry }) {
     console.log('in addNewCategory');
     dispatch({ type: 'POST_CATEGORY', payload: newCategory });
     setDialogOpen(false);
+    setNewCategory('');
   };
 
   return (
@@ -115,7 +116,10 @@ function FavoritesItem({ entry }) {
             <Button
               color="secondary"
               variant="outlined"
-              onClick={() => setDialogOpen(false)}
+              onClick={() => {
+                setDialogOpen(false);
+                setNewCategory('');
+              }}
             >
               Cancel
             </Button>
