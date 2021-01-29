@@ -9,33 +9,21 @@ function FavoritesList() {
   const favorites = useSelector((state) => state.favoriteReducer);
 
   useEffect(() => {
-    dispatch({type: 'FETCH_GIF'})
-}, []);
+    dispatch({ type: 'FETCH_GIF' });
+  }, []);
 
   console.log('logging favorites', favorites);
   console.log(favorites[0].image_url);
 
   return (
-<<<<<<< HEAD
     <Grid container spacing={4} justify="center">
       {favorites.map((entry) => {
-=======
-    <Grid container>
-      {favorites.map((entry, i) => {
->>>>>>> 179af00c26db3e1d3492c17bf2abe8e8e2d5c8ad
         return (
           <Grid item>
-            <FavoritesItem key={entry} entry={entry} />
+            <FavoritesItem key={entry.id} entry={entry} />
           </Grid>
         );
       })}
-<<<<<<< HEAD
-      <div></div>
-=======
-      <div>
-
-      </div>
->>>>>>> 179af00c26db3e1d3492c17bf2abe8e8e2d5c8ad
     </Grid>
   );
 }
