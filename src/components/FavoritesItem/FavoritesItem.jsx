@@ -19,11 +19,12 @@ function FavoritesItem({ entry }) {
   const dispatch = useDispatch();
   const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
-  const categoryList = useSelector(store => store.categoryReducer)
+  const categoryList = useSelector(state => state.categoryReducer)
 
-  const addCategoryToGif = (clickedText) => {
+  const addCategoryToGif = (categoryId) => {
+    
     // setCategory(clickedText);
-    dispatch({type: 'PUT_GIF', payload: {categoryId: categoryItem.id, id: entry.id} })
+    dispatch({type: 'PUT_GIF', payload: {categoryId: categoryId, id: entry.id} })
 
     setAnchorEl(null);
   };
@@ -42,7 +43,7 @@ function FavoritesItem({ entry }) {
     dispatch({ type: 'ADD_CATEGORY', payload: newCategoryName });
   };
   
-  useEffect(() => dispatch({ type: 'GET_CATEGORIES' }), []);
+  
 
   return (
     <Card elevation={4}>
@@ -54,7 +55,7 @@ function FavoritesItem({ entry }) {
       <CardContent>
         <Box minHeight={25}>
           <Typography variant="body1" align="center">
-            {category}
+            {entry.name}
           </Typography>
         </Box>
       </CardContent>
