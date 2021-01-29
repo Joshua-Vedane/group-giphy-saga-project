@@ -48,13 +48,13 @@ const categoryReducer = (state = [], action) => {
 
 function* getCategories(){
     try {
-        const response = yield axios.get('./routes/category.router');
+        const response = yield axios.get('/api/category');
         console.log('Getting categories', response.data);
         
         yield put({ type: 'WHERE_DOES_THIS_GO', payload: response.data });
         
     } catch (err) {
-        console.log(err);
+        console.log('error in getting the categories',err);
     }
 }
 
