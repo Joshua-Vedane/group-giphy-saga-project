@@ -86,8 +86,8 @@ function* postSearch(action) {
 function* putGif(action) {
   try {
     const gifId = action.payload.id;
-    const category = action.payload.category;
-    yield axios.put(`/api/favorite/${gifId}`, { category: category });
+    const categoryId = action.payload.categoryId;
+    yield axios.put(`/api/favorite/${gifId}`, { categoryId });
     yield put({ type: 'FETCH_GIF' });
   } catch (error) {
     console.log('error in put');
