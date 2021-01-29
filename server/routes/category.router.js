@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 // POST route to add new category to table
 router.post('/', (req, res) => {
-  const queryText = `INSERT INTO "category" VALUES ($1);`;
+  const queryText = `INSERT INTO "category" ("name") VALUES ($1);`;
   pool
     .query(queryText, [req.body.newCategoryName])
     .then(res.sendStatus(201))
