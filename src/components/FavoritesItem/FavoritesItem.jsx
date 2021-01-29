@@ -19,7 +19,7 @@ function FavoritesItem({ entry }) {
   const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const setCategory = (clickedText) => {
+  const addCategoryToGif = (clickedText) => {
     setCategory(clickedText);
     setAnchorEl(null);
   };
@@ -58,14 +58,14 @@ function FavoritesItem({ entry }) {
             open={Boolean(anchorEl)}
             onClose={() => setAnchorEl(null)}
           >
-            <MenuItem onClick={() => setCategory('')}>
+            <MenuItem onClick={() => addCategory('')}>
               <em>none</em>
             </MenuItem>
-            <MenuItem onClick={() => setCategory('funny')}>Funny</MenuItem>
-            <MenuItem onClick={() => setCategory('odd')}>Odd</MenuItem>
-            <MenuItem onClick={() => setCategory('cartoon')}>Cartoon</MenuItem>
-            <MenuItem onClick={() => setCategory('spicy')}>Spicy</MenuItem>
-            <MenuItem onClick={() => setCategory('meme')}>Meme</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('funny')}>Funny</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('odd')}>Odd</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('cartoon')}>Cartoon</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('spicy')}>Spicy</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('meme')}>Meme</MenuItem>
           </Menu>
           <IconButton onClick={handleDelete}>
             <DeleteOutline />
