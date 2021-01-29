@@ -23,18 +23,17 @@ const searchReducer = (state = [], action) => {
 };
 
 //-- Fav reducer
-//  '/api/favorite'
+
 const favoriteReducer = (state = [], action) => {
   switch (action.type) {
     case 'FAVORITE_GIF':
-      return action.payload
+      return action.payload;
     default:
       return state;
   }
 };
 
 //-- Category reducer
-//  '/api/category'
 
 const categoryReducer = (state = [], action) => {
   switch (action.type) {
@@ -45,14 +44,14 @@ const categoryReducer = (state = [], action) => {
   }
 };
 
-//generator functions
+// Sagas
 
 function* getCategories(){
     try {
         const response = yield axios.get('./routes/category.router');
-        console.log('Getting categories', response);
+        console.log('Getting categories', response.data);
         
-        
+        yield put({ type: 'WHERE_DOES_THIS_GO', payload: response.data });
         
     } catch (err) {
         console.log(err);
@@ -66,10 +65,10 @@ function* fetchGif() {
 
     const response = yield axios.get('/api/favorite');
     console.log('fetchGif response:', response);
-    
+
     yield put({ type: 'FAVORITE_GIF', payload: response.data });
   } catch (error) {
-    console.log('error in getting the GIF');
+    console.log('error in getting the GIF', error);
   }
 } //end fetchGif
 
@@ -81,7 +80,7 @@ function* postGif(action) {
     yield axios.post('/api/favorite', newGif);
     yield put({ type: 'FETCH_GIF' });
   } catch (error) {
-    console.log('error in postGif');
+    console.log('error in postGif', error);
   }
 } //end postGif
 
@@ -93,29 +92,40 @@ function* postSearch(action) {
     const response = yield axios.post('/api/giphy', { newSearch });
     yield put({ type: 'FETCH_SEARCH', payload: response.data.data });
   } catch (error) {
-    console.log('error in postSearch');
+    console.log('error in postSearch', error);
   }
 } //end postSearch
+
+function* postCategory(action) {
+  try {
+    console.log('post Category');
+    const newCat = action.payload;
+    yield axios.post('/api/category', { newCategoryName: newCat });
+    yield put({ type: 'FETCH_SEARCH' });
+  } catch (error) {
+    console.log('error in postCategory', error);
+  }
+} //end postCategory
 
 function* putGif(action) {
   try {
     const gifId = action.payload.id;
-    const category = action.payload.category;
-    yield axios.put(`/api/favorite/${gifId}`, { category: category });
+    const categoryId = action.payload.categoryId;
+    yield axios.put(`/api/favorite/${gifId}`, { categoryId });
     yield put({ type: 'FETCH_GIF' });
   } catch (error) {
-    console.log('error in put');
+    console.log('error in put', error);
   }
 } //end putGif
 
 function* deleteFav(action) {
-    try {
-        const favId = action.payload
-        yield axios.delete(`/api/favorite/${favId}`)
-        yield put({ type: 'FETCH_GIF' })
-    } catch (error) {
-        console.log('error in deleting gif', error)
-    }
+  try {
+    const favId = action.payload;
+    yield axios.delete(`/api/favorite/${favId}`);
+    yield put({ type: 'FETCH_GIF' });
+  } catch (error) {
+    console.log('error in deleting gif', error);
+  }
 }
 
 //saga watcher
@@ -123,8 +133,10 @@ function* watcherSaga() {
   yield takeEvery('FETCH_GIF', fetchGif);
   yield takeEvery('POST_GIF', postGif);
   yield takeEvery('POST_SEARCH', postSearch);
+  yield takeEvery('POST_CATEGORY', postCategory);
   yield takeEvery('PUT_GIF', putGif);
   yield takeEvery('DELETE_FAV', deleteFav);
+  yield takeEvery('GET_CATEGORIES', getCategories);
 } //end watcherSaga
 
 // middleware and storeInstance
