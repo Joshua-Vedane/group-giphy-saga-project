@@ -13,14 +13,18 @@ import {
   Typography,
 } from '@material-ui/core';
 import { DeleteOutline } from '@material-ui/icons';
+import { useEffect } from 'react';
 
 function FavoritesItem({ entry }) {
   const dispatch = useDispatch();
   const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
+  const categoryList = useSelector(store => store.categoryReducer)
 
   const addCategoryToGif = (clickedText) => {
-    setCategory(clickedText);
+    // setCategory(clickedText);
+    dispatch({type: 'PUT_GIF', payload: {categoryId: categoryItem.id, id: entry.id} })
+
     setAnchorEl(null);
   };
 
@@ -37,6 +41,8 @@ function FavoritesItem({ entry }) {
     console.log('in addNewCategory');
     dispatch({ type: 'ADD_CATEGORY', payload: newCategoryName });
   };
+  
+  useEffect(() => dispatch({ type: 'GET_CATEGORIES' }), []);
 
   return (
     <Card elevation={4}>
@@ -66,11 +72,19 @@ function FavoritesItem({ entry }) {
             <MenuItem onClick={() => addCategoryToGif('')}>
               <em>none</em>
             </MenuItem>
-            <MenuItem onClick={() => addCategoryToGif('funny')}>Funny</MenuItem>
+            {/* map over categoryList to display all categories as option items */}
+            {/* add Category only sends the id that corresponds to the name of the category in the DB */}
+            {categoryList.map((categoryItem) => {
+              return(
+                <MenuItem onClick={() => addCategoryToGif(categoryItem.id)}>{categoryItem.name}</MenuItem>
+              )
+            })}
+
+            {/* <MenuItem onClick={() => addCategoryToGif('funny')}>Funny</MenuItem>
             <MenuItem onClick={() => addCategoryToGif('odd')}>Odd</MenuItem>
             <MenuItem onClick={() => addCategoryToGif('cartoon')}>Cartoon</MenuItem>
             <MenuItem onClick={() => addCategoryToGif('spicy')}>Spicy</MenuItem>
-            <MenuItem onClick={() => addCategoryToGif('meme')}>Meme</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('meme')}>Meme</MenuItem> */}
           </Menu>
           <IconButton onClick={handleDelete}>
             <DeleteOutline />
