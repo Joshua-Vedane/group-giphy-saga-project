@@ -5,10 +5,13 @@ const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  const queryText = `SELECT "favorites".id, "favorites".image_url, "category".name FROM "favorites"
-  JOIN "category" ON "favorites".category_id = "category".id;`;
+  const queryText = `SELECT "favorites".id, "favorites".image_url, "category".name 
+                    FROM "favorites"
+                    LEFT JOIN "category" ON "favorites".category_id = "category".id;`;
   pool.query(queryText)
     .then((result) => {
+      console.log(result.rows);
+      
       res.send(result.rows);
     }).catch((error) => {
       console.log('ERROR completing SELECT favorites', error);
@@ -47,8 +50,14 @@ router.put('/:favId', (req, res) => {
 });
 
 // delete a favorite
-router.delete('/', (req, res) => {
-  res.sendStatus(200);
+router.delete('/:id', (req, res) => {
+  const queryText = `DELETE FROM "favorites" WHERE id=$1;`;
+  pool.query(queryText, [req.params.id])
+    .then(() => {res.sendStatus(200);
+    }).catch((error) => {
+      console.log('ERROR in DELETE', error);
+      res.sendStatus(500);
+    })
 });
 
 module.exports = router;

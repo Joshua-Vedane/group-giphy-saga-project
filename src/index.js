@@ -31,7 +31,7 @@ const searchReducer = (state = [], action) => {
 const favoriteReducer = (state = startingFav, action) => {
   switch (action.type) {
     case 'FAVORITE_GIF':
-      return action.payload;
+      return action.payload
     default:
       return state;
   }
@@ -55,6 +55,8 @@ function* fetchGif() {
     console.log('fetch the GIF');
 
     const response = yield axios.get('/api/favorite');
+    console.log('fetchGif response:', response);
+    
     yield put({ type: 'FAVORITE_GIF', payload: response.data });
   } catch (error) {
     console.log('error in getting the GIF');
