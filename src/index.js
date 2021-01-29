@@ -45,7 +45,7 @@ const categoryReducer = (state = [], action) => {
   }
 };
 
-//generator functions
+// SAGAs
 function* fetchGif() {
   try {
     console.log('fetch the GIF');
@@ -69,7 +69,7 @@ function* postGif(action) {
   } catch (error) {
     console.log('error in postGif');
   }
-} //end postGif
+}; //end postGif
 
 function* postSearch(action) {
   try {
@@ -81,7 +81,19 @@ function* postSearch(action) {
   } catch (error) {
     console.log('error in postSearch');
   }
-} //end postSearch
+}; //end postSearch
+
+function* postCategory(action) {
+    try {
+        console.log('post Category');
+
+        const newCat = action.payload;
+        yield axios.post('/api/category', {newCategoryName: newCat} )
+        yield put({ type: 'FETCH_SEARCH' })
+    } catch (error) {
+        console.log('error in postCategory')
+    }
+}; //end postCategory 
 
 function* putGif(action) {
   try {
@@ -109,6 +121,7 @@ function* watcherSaga() {
   yield takeEvery('FETCH_GIF', fetchGif);
   yield takeEvery('POST_GIF', postGif);
   yield takeEvery('POST_SEARCH', postSearch);
+  yield takeEvery('POST_CATEGORY', postCategory);
   yield takeEvery('PUT_GIF', putGif);
   yield takeEvery('DELETE_FAV', deleteFav);
 } //end watcherSaga
