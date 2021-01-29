@@ -12,11 +12,13 @@ import {
   MenuItem,
   Typography,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogTitle,
   TextField,
 } from '@material-ui/core';
 import { DeleteOutline } from '@material-ui/icons';
+import { useEffect } from 'react';
 
 function FavoritesItem({ entry }) {
   const dispatch = useDispatch();
@@ -24,14 +26,25 @@ function FavoritesItem({ entry }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [newCategory, setNewCategory] = useState('');
+  const categoryList = useSelector((store) => store.categoryReducer);
+
+  useEffect(() => dispatch({ type: 'GET_CATEGORIES' }), []);
 
   const handleDialogOpen = () => {
     setDialogOpen(true);
     setAnchorEl(null);
   };
 
+  const addNewCategory = () => {
+    console.log('clicked!');
+  };
+
   const addCategoryToGif = (clickedText) => {
-    setCategory(clickedText);
+    // setCategory(clickedText);
+    dispatch({
+      type: 'PUT_GIF',
+      payload: { categoryId: categoryItem.id, id: entry.id },
+    });
     setAnchorEl(null);
   };
 
@@ -73,17 +86,13 @@ function FavoritesItem({ entry }) {
               <MenuItem onClick={() => addCategoryToGif('')}>
                 <em>none</em>
               </MenuItem>
-              <MenuItem onClick={() => addCategoryToGif('funny')}>
-                Funny
-              </MenuItem>
-              <MenuItem onClick={() => addCategoryToGif('odd')}>Odd</MenuItem>
-              <MenuItem onClick={() => addCategoryToGif('cartoon')}>
-                Cartoon
-              </MenuItem>
-              <MenuItem onClick={() => addCategoryToGif('spicy')}>
-                Spicy
-              </MenuItem>
-              <MenuItem onClick={() => addCategoryToGif('meme')}>Meme</MenuItem>
+              {categoryList.map((categoryItem) => {
+                return (
+                  <MenuItem onClick={() => addCategoryToGif(categoryItem.id)}>
+                    {categoryItem.name}
+                  </MenuItem>
+                );
+              })}
               <MenuItem onClick={handleDialogOpen}>Add New Category</MenuItem>
             </Menu>
             <IconButton onClick={handleDelete}>
@@ -101,8 +110,8 @@ function FavoritesItem({ entry }) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={addNewCategory}>Add</Button>
           <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
+          <Button onClick={addNewCategory}>Add</Button>
         </DialogActions>
       </Dialog>
     </>
