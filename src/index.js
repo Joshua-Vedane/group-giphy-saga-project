@@ -23,7 +23,7 @@ const searchReducer = (state = [], action) => {
 };
 
 //-- Fav reducer
-//  '/api/favorite'
+
 const favoriteReducer = (state = [], action) => {
   switch (action.type) {
     case 'FAVORITE_GIF':
@@ -34,7 +34,6 @@ const favoriteReducer = (state = [], action) => {
 };
 
 //-- Category reducer
-//  '/api/category'
 
 const categoryReducer = (state = [], action) => {
   switch (action.type) {
@@ -45,7 +44,21 @@ const categoryReducer = (state = [], action) => {
   }
 };
 
-// SAGAs
+// Sagas
+
+function* getCategories(){
+    try {
+        const response = yield axios.get('./routes/category.router');
+        console.log('Getting categories', response.data);
+        
+        yield put({ type: 'WHERE_DOES_THIS_GO', payload: response.data });
+        
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
 function* fetchGif() {
   try {
     console.log('fetch the GIF');
@@ -55,7 +68,7 @@ function* fetchGif() {
 
     yield put({ type: 'FAVORITE_GIF', payload: response.data });
   } catch (error) {
-    console.log('error in getting the GIF');
+    console.log('error in getting the GIF', error);
   }
 } //end fetchGif
 
@@ -67,7 +80,7 @@ function* postGif(action) {
     yield axios.post('/api/favorite', newGif);
     yield put({ type: 'FETCH_GIF' });
   } catch (error) {
-    console.log('error in postGif');
+    console.log('error in postGif', error);
   }
 } //end postGif
 
@@ -79,7 +92,7 @@ function* postSearch(action) {
     const response = yield axios.post('/api/giphy', { newSearch });
     yield put({ type: 'FETCH_SEARCH', payload: response.data.data });
   } catch (error) {
-    console.log('error in postSearch');
+    console.log('error in postSearch', error);
   }
 } //end postSearch
 
@@ -90,7 +103,7 @@ function* postCategory(action) {
     yield axios.post('/api/category', { newCategoryName: newCat });
     yield put({ type: 'FETCH_SEARCH' });
   } catch (error) {
-    console.log('error in postCategory');
+    console.log('error in postCategory', error);
   }
 } //end postCategory
 
@@ -101,7 +114,7 @@ function* putGif(action) {
     yield axios.put(`/api/favorite/${gifId}`, { categoryId });
     yield put({ type: 'FETCH_GIF' });
   } catch (error) {
-    console.log('error in put');
+    console.log('error in put', error);
   }
 } //end putGif
 
@@ -123,6 +136,7 @@ function* watcherSaga() {
   yield takeEvery('POST_CATEGORY', postCategory);
   yield takeEvery('PUT_GIF', putGif);
   yield takeEvery('DELETE_FAV', deleteFav);
+  yield takeEvery('GET_CATEGORIES', getCategories);
 } //end watcherSaga
 
 // middleware and storeInstance
