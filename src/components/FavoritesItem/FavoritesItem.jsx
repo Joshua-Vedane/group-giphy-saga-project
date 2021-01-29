@@ -55,7 +55,7 @@ function FavoritesItem({ entry }) {
 
   const addNewCategory = () => {
     console.log('in addNewCategory');
-    dispatch({ type: 'ADD_CATEGORY', payload: newCategoryName });
+    dispatch({ type: 'POST_CATEGORY', payload: newCategory });
     setDialogOpen(false);
   };
 

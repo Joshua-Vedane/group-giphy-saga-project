@@ -46,18 +46,16 @@ const categoryReducer = (state = [], action) => {
 
 // Sagas
 
-function* getCategories(){
-    try {
-        const response = yield axios.get('./routes/category.router');
-        console.log('Getting categories', response.data);
-        
-        yield put({ type: 'WHERE_DOES_THIS_GO', payload: response.data });
-        
-    } catch (err) {
-        console.log(err);
-    }
-}
+function* getCategories() {
+  try {
+    const response = yield axios.get('./routes/category.router');
+    console.log('Getting categories', response.data);
 
+    yield put({ type: 'WHERE_DOES_THIS_GO', payload: response.data });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 function* fetchGif() {
   try {
@@ -101,7 +99,7 @@ function* postCategory(action) {
     console.log('post Category');
     const newCat = action.payload;
     yield axios.post('/api/category', { newCategoryName: newCat });
-    yield put({ type: 'FETCH_SEARCH' });
+    yield put({ type: 'GET_CATEGORIES' });
   } catch (error) {
     console.log('error in postCategory', error);
   }
