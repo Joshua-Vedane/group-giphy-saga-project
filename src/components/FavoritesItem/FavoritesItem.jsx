@@ -88,7 +88,7 @@ function FavoritesItem({ entry }) {
               open={Boolean(anchorEl)}
               onClose={() => setAnchorEl(null)}
             >
-              <MenuItem onClick={() => addCategoryToGif('')}>
+              <MenuItem onClick={() => addCategoryToGif(null)}>
                 <em>none</em>
               </MenuItem>
               {categoryList.map((categoryItem) => {
