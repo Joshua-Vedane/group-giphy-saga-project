@@ -13,7 +13,7 @@ function FavoritesList() {
   console.log(favorites[0].image_url);
 
   return (
-    <Grid container>
+    <Grid container spacing={4} justify="center">
       {favorites.map((entry) => {
         return (
           <Grid item>
@@ -21,9 +21,7 @@ function FavoritesList() {
           </Grid>
         );
       })}
-      <div>
-        
-      </div>
+      <div></div>
     </Grid>
   );
 }

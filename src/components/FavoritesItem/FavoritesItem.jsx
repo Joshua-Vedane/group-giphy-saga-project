@@ -5,16 +5,39 @@ import {
   Card,
   CardActionArea,
   CardActions,
+  CardContent,
   IconButton,
-  Button,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
+  Typography,
 } from '@material-ui/core';
-import { AddCircle, DeleteOutlineIcon } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
+import { DeleteOutline } from '@material-ui/icons';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 110,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 function FavoritesItem({ entry }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
   console.log(entry.image_url);
-  const handleFavorite = () => {
-    console.log('clicked handleFavorite');
+  const [category, setCategory] = useState('');
+
+  const handleCategory = (event) => {
+    console.log(event.target.value);
+    setCategory(event.target.value);
+  };
+  const handleDelete = () => {
+    console.log('clicked handleDelete');
   };
 
   return (
@@ -24,42 +47,37 @@ function FavoritesItem({ entry }) {
           <img src={entry.image_url} />
         </Box>
       </CardActionArea>
-      <Box display="flex" justifyContent="center" alignItems="center">
+      <CardContent>
+        <Typography variant="h6" align="center">
+          {category}
+        </Typography>
+      </CardContent>
+      <Box display="flex" alignItems="center" justifyContent="center">
         <CardActions>
-          <Button
-            variant="contained"
-            onClick={handleFavorite}
-            endIcon={<AddCircle />}
-          >
-            Add
-          </Button>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="categoryLabel">Category</InputLabel>
+            <Select
+              value={category}
+              labelId="categoryLabel"
+              onChange={handleCategory}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="funny">Funny</MenuItem>
+              <MenuItem value="odd">Odd</MenuItem>
+              <MenuItem value="cartoon">Cartoon</MenuItem>
+              <MenuItem value="spicy">Spicy</MenuItem>
+              <MenuItem value="meme">Meme</MenuItem>
+            </Select>
+          </FormControl>
+          <IconButton onClick={handleDelete}>
+            <DeleteOutline />
+          </IconButton>
         </CardActions>
       </Box>
     </Card>
   );
-}
-
-{
-  /* <Card elevation={4}>
-  <CardActionArea>
-    <Box p={2}>
-      <img src={entry.image_url} />
-    </Box>
-  </CardActionArea>
-  <Box display="flex" justifyContent="center" alignItems="center">
-    <CardActions>
-      {!faved ? (
-        <IconButton onClick={handleFavorite}>
-          <FavoriteBorder />
-        </IconButton>
-      ) : (
-        <IconButton>
-          <Favorite color="secondary" />
-        </IconButton>
-      )}
-    </CardActions>
-  </Box>
-</Card>; */
 }
 
 export default FavoritesItem;

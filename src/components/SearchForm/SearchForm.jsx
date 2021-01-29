@@ -20,17 +20,25 @@ function SearchForm() {
     history.push('/favorites');
   };
 
+  const sendHome = () => {
+    history.push('/');
+  };
+
   return (
     <>
       <Box p={3}>
         <form onSubmit={submitSearch}>
-          <Box display="flex" alignItems="center">
-            <Box marginRight={2} width="30%">
+          <Box display="flex" alignItems="center" justifyContent="center">
+            <Box
+              marginRight={2}
+              onClick={sendHome}
+              style={{ cursor: 'pointer' }}
+            >
               <Typography variant="h4" align="right">
                 Giphy Search!
               </Typography>
             </Box>
-            <Box mx={2} width="50%">
+            <Box mx={2} flexGrow={1}>
               <TextField
                 fullWidth={true}
                 label="Search Giphy"
@@ -39,7 +47,7 @@ function SearchForm() {
                 onChange={(event) => setSearch(event.target.value)}
               />
             </Box>
-            <Box mx={2} width="10%">
+            <Box mx={2}>
               <Button
                 type="submit"
                 variant="contained"
@@ -49,7 +57,7 @@ function SearchForm() {
                 Search
               </Button>
             </Box>
-            <Box marginLeft={3} width="10%">
+            <Box marginLeft={3}>
               <Button
                 variant="contained"
                 color="secondary"
