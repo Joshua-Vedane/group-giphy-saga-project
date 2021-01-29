@@ -36,8 +36,10 @@ function FavoritesItem({ entry }) {
     console.log(event.target.value);
     setCategory(event.target.value);
   };
+  
   const handleDelete = () => {
     console.log('clicked handleDelete');
+    dispatch({ type: 'DELETE_FAV', payload: entry.id });
   };
 
   return (
