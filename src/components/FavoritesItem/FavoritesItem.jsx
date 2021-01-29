@@ -4,34 +4,78 @@ import {
   Box,
   Card,
   CardActionArea,
-  CardMedia,
   CardActions,
+  CardContent,
   IconButton,
-  Button,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
+  Typography,
 } from '@material-ui/core';
-import { Favorite, FavoriteBorder } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
+import { DeleteOutline } from '@material-ui/icons';
 
-function FavoritesItem({entry}) {
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 110,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+function FavoritesItem({ entry }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
-  let gif = entry.image_url;
-  console.log('logging entry', entry);
-  const handleFavorite = () => {
-    console.log('clicked handleFavorite');
+  console.log(entry.image_url);
+  const [category, setCategory] = useState('');
+
+  const handleCategory = (event) => {
+    console.log(event.target.value);
+    setCategory(event.target.value);
+  };
+  const handleDelete = () => {
+    console.log('clicked handleDelete');
   };
 
   return (
-    <Card key={entry.id}>
+    <Card elevation={4}>
       <CardActionArea>
-      <img src={`${gif}`}/>
-      </CardActionArea>
-      <CardActions>
-        <Box display="flex" justifyContent="center">
-          <p>Categories go here!</p>
-          <Button variant="contained" onClick={handleFavorite}>
-            Add category
-          </Button>
+        <Box p={2}>
+          <img src={entry.image_url} />
         </Box>
-      </CardActions>
+      </CardActionArea>
+      <CardContent>
+        <Typography variant="h6" align="center">
+          {category}
+        </Typography>
+      </CardContent>
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <CardActions>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="categoryLabel">Category</InputLabel>
+            <Select
+              value={category}
+              labelId="categoryLabel"
+              onChange={handleCategory}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="funny">Funny</MenuItem>
+              <MenuItem value="odd">Odd</MenuItem>
+              <MenuItem value="cartoon">Cartoon</MenuItem>
+              <MenuItem value="spicy">Spicy</MenuItem>
+              <MenuItem value="meme">Meme</MenuItem>
+            </Select>
+          </FormControl>
+          <IconButton onClick={handleDelete}>
+            <DeleteOutline />
+          </IconButton>
+        </CardActions>
+      </Box>
     </Card>
   );
 }
