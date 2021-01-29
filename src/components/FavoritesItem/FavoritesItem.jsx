@@ -37,6 +37,11 @@ function FavoritesItem({ entry }) {
     setAnchorEl(event.currentTarget);
   };
 
+  const addNewCategory = () => {
+    console.log('in addNewCategory');
+    dispatch({ type: 'ADD_CATEGORY', payload: newCategoryName });
+  };
+  
   useEffect(() => dispatch({ type: 'GET_CATEGORIES' }), []);
 
   return (
