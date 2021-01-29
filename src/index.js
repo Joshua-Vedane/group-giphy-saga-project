@@ -27,7 +27,7 @@ const searchReducer = (state = [], action) => {
 const favoriteReducer = (state = [], action) => {
   switch (action.type) {
     case 'FAVORITE_GIF':
-      return action.payload
+      return action.payload;
     default:
       return state;
   }
@@ -52,7 +52,7 @@ function* fetchGif() {
 
     const response = yield axios.get('/api/favorite');
     console.log('fetchGif response:', response);
-    
+
     yield put({ type: 'FAVORITE_GIF', payload: response.data });
   } catch (error) {
     console.log('error in getting the GIF');
@@ -69,7 +69,7 @@ function* postGif(action) {
   } catch (error) {
     console.log('error in postGif');
   }
-}; //end postGif
+} //end postGif
 
 function* postSearch(action) {
   try {
@@ -81,19 +81,18 @@ function* postSearch(action) {
   } catch (error) {
     console.log('error in postSearch');
   }
-}; //end postSearch
+} //end postSearch
 
 function* postCategory(action) {
-    try {
-        console.log('post Category');
-
-        const newCat = action.payload;
-        yield axios.post('/api/category', {newCategoryName: newCat} )
-        yield put({ type: 'FETCH_SEARCH' })
-    } catch (error) {
-        console.log('error in postCategory')
-    }
-}; //end postCategory 
+  try {
+    console.log('post Category');
+    const newCat = action.payload;
+    yield axios.post('/api/category', { newCategoryName: newCat });
+    yield put({ type: 'FETCH_SEARCH' });
+  } catch (error) {
+    console.log('error in postCategory');
+  }
+} //end postCategory
 
 function* putGif(action) {
   try {
@@ -107,13 +106,13 @@ function* putGif(action) {
 } //end putGif
 
 function* deleteFav(action) {
-    try {
-        const favId = action.payload
-        yield axios.delete(`/api/favorite/${favId}`)
-        yield put({ type: 'FETCH_GIF' })
-    } catch (error) {
-        console.log('error in deleting gif', error)
-    }
+  try {
+    const favId = action.payload;
+    yield axios.delete(`/api/favorite/${favId}`);
+    yield put({ type: 'FETCH_GIF' });
+  } catch (error) {
+    console.log('error in deleting gif', error);
+  }
 }
 
 //saga watcher
