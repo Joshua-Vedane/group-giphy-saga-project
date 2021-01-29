@@ -9,10 +9,6 @@ import axios from 'axios';
 
 import App from './components/App/App';
 
-const startingFav = [
-  { image_url: 'https://media.giphy.com/media/HgtCxKvJZ7Wi4/giphy.gif' },
-];
-
 //reducers
 
 //-- Search reducer
@@ -28,7 +24,7 @@ const searchReducer = (state = [], action) => {
 
 //-- Fav reducer
 //  '/api/favorite'
-const favoriteReducer = (state = startingFav, action) => {
+const favoriteReducer = (state = [], action) => {
   switch (action.type) {
     case 'FAVORITE_GIF':
       return action.payload

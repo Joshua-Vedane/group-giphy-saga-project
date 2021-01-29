@@ -12,15 +12,12 @@ function FavoritesList() {
     dispatch({ type: 'FETCH_GIF' });
   }, []);
 
-  console.log('logging favorites', favorites);
-  console.log(favorites[0].image_url);
-
   return (
     <Grid container spacing={4} justify="center">
       {favorites.map((entry) => {
         return (
-          <Grid item>
-            <FavoritesItem key={entry.id} entry={entry} />
+          <Grid item key={entry.id}>
+            <FavoritesItem entry={entry} />
           </Grid>
         );
       })}
