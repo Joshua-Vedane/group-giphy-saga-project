@@ -2,77 +2,71 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
+  Button,
   Card,
   CardActionArea,
   CardActions,
   CardContent,
   IconButton,
-  InputLabel,
-  FormControl,
-  Select,
+  Menu,
   MenuItem,
   Typography,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { DeleteOutline } from '@material-ui/icons';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 110,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
 function FavoritesItem({ entry }) {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  console.log(entry.image_url);
   const [category, setCategory] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleCategory = (event) => {
-    console.log(event.target.value);
-    setCategory(event.target.value);
+  const setCategory = (clickedText) => {
+    setCategory(clickedText);
+    setAnchorEl(null);
   };
-  
+
   const handleDelete = () => {
     console.log('clicked handleDelete');
     dispatch({ type: 'DELETE_FAV', payload: entry.id });
   };
 
+  const handleOpenMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
     <Card elevation={4}>
       <CardActionArea>
-        <Box p={2}>
+        <Box paddingTop={2} paddingLeft={2} paddingRight={2}>
           <img src={entry.image_url} />
         </Box>
       </CardActionArea>
       <CardContent>
-        <Typography variant="h6" align="center">
-          {category}
-        </Typography>
+        <Box minHeight={25}>
+          <Typography variant="body1" align="center">
+            {category}
+          </Typography>
+        </Box>
       </CardContent>
       <Box display="flex" alignItems="center" justifyContent="center">
         <CardActions>
-          <FormControl variant="filled" className={classes.formControl}>
-            <InputLabel id="categoryLabel">Category</InputLabel>
-            <Select
-              value={category}
-              labelId="categoryLabel"
-              onChange={handleCategory}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value="funny">Funny</MenuItem>
-              <MenuItem value="odd">Odd</MenuItem>
-              <MenuItem value="cartoon">Cartoon</MenuItem>
-              <MenuItem value="spicy">Spicy</MenuItem>
-              <MenuItem value="meme">Meme</MenuItem>
-            </Select>
-          </FormControl>
+          <Button color="primary" onClick={handleOpenMenu}>
+            Categories
+          </Button>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+          >
+            <MenuItem onClick={() => setCategory('')}>
+              <em>none</em>
+            </MenuItem>
+            <MenuItem onClick={() => setCategory('funny')}>Funny</MenuItem>
+            <MenuItem onClick={() => setCategory('odd')}>Odd</MenuItem>
+            <MenuItem onClick={() => setCategory('cartoon')}>Cartoon</MenuItem>
+            <MenuItem onClick={() => setCategory('spicy')}>Spicy</MenuItem>
+            <MenuItem onClick={() => setCategory('meme')}>Meme</MenuItem>
+          </Menu>
           <IconButton onClick={handleDelete}>
             <DeleteOutline />
           </IconButton>

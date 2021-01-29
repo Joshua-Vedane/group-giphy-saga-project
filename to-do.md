@@ -11,41 +11,41 @@
 
 # CLIENT
 
-  [ ] two views for base features
-    [ ] search view
-      [ ] input for search terms
-      [ ] submit button / form
-      [ ] display area, show gifs on dom (material-ui cards)
-      [ ] button to favorite image
-      [ ] start small with giphy search results
-    [ ] favorites view (all on dom first)
-      [ ] display cards of favorited images
-      [ ] connected to table with image url's
+  [x] two views for base features
+    [x] search view
+      [x] input for search terms
+      [x] submit button / form
+      [x] display area, show gifs on dom (material-ui cards)
+      [x] button to favorite image
+      [x] start small with giphy search results
+    [x] favorites view (all on dom first)
+      [x] display cards of favorited images
+      [x] connected to table with image url's
       [ ] select to give each favorite a category
 
-  [ ] index.js
-    [ ] reducers
-      [ ] giphy api search results
-      [ ] favorites
-      [ ] categories
-    [ ] sagas
-      [ ] GET route from giphy
-      [ ] GET route for favorites table
-      [ ] POST to favorites
-      [ ] PUT route to favorites to assign category
-
+  [x] index.js
+    [x] reducers
+      [x] giphy api search results
+      [x] favorites
+      [x] categories
+    [x] sagas
+      [x] GET route from giphy
+      [x] GET route for favorites table
+      [x] POST to favorites
+      [x] PUT route to favorites to assign category
+      [x] DELETE route to delete a favorite
 
 # SERVER
-  [ ] GET route from giphy
-    [ ] need to figure out api key stuff
-    [ ] dotenv file
-  [ ] GET route for giphy should be complete
-  [ ] complete POST route to favorites table
+  [x] GET route from giphy
+    [x] need to figure out api key stuff
+    [x] dotenv file
+  [x] GET route for giphy should be complete
+  [x] complete POST route to favorites table
   [ ] complete PUT route to favorites table to assign category
 
 
 # DB
 
-[ ] set up database
-  [ ] image favorite table, figure out what data we need
-    [ ] column INT REFERENCES 'category table'
+[x] set up database
+  [x] image favorite table, figure out what data we need
+    [x] column INT REFERENCES 'category table'
