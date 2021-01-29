@@ -46,6 +46,18 @@ const categoryReducer = (state = [], action) => {
 
 // Sagas
 
+<<<<<<< HEAD
+function* getCategories(){
+    try {
+        const response = yield axios.get('/api/category');
+        console.log('Getting categories', response.data);
+        
+        yield put({ type: 'WHERE_DOES_THIS_GO', payload: response.data });
+        
+    } catch (err) {
+        console.log(err);
+    }
+=======
 function* getCategories() {
   try {
     const response = yield axios.get('/api/category');
@@ -54,6 +66,7 @@ function* getCategories() {
   } catch (err) {
     console.log('error in getting the categories', err);
   }
+>>>>>>> 66702f8d73c442fe6e2b8b5fe648a9e11b6ea7df
 }
 
 function* fetchGif() {

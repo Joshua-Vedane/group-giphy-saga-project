@@ -9,6 +9,7 @@ function FavoritesList() {
   const favorites = useSelector((state) => state.favoriteReducer);
 
   useEffect(() => dispatch({ type: 'FETCH_GIF' }), []);
+  useEffect(() => dispatch({ type: 'GET_CATEGORIES' }), []);
 
   return (
     <Grid container spacing={4} justify="center">

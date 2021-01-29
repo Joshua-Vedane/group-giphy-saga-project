@@ -24,6 +24,9 @@ function FavoritesItem({ entry }) {
   const dispatch = useDispatch();
   const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
+<<<<<<< HEAD
+  const categoryList = useSelector(state => state.categoryReducer)
+=======
   const [dialogOpen, setDialogOpen] = useState(false);
   const [newCategory, setNewCategory] = useState('');
   const categoryList = useSelector((store) => store.categoryReducer);
@@ -34,13 +37,20 @@ function FavoritesItem({ entry }) {
     setDialogOpen(true);
     setAnchorEl(null);
   };
+>>>>>>> 66702f8d73c442fe6e2b8b5fe648a9e11b6ea7df
 
-  const addCategoryToGif = (clickedText) => {
+  const addCategoryToGif = (categoryId) => {
+    
     // setCategory(clickedText);
+<<<<<<< HEAD
+    dispatch({type: 'PUT_GIF', payload: {categoryId: categoryId, id: entry.id} })
+
+=======
     dispatch({
       type: 'PUT_GIF',
       payload: { categoryId: categoryItem.id, id: entry.id },
     });
+>>>>>>> 66702f8d73c442fe6e2b8b5fe648a9e11b6ea7df
     setAnchorEl(null);
   };
 
@@ -58,8 +68,13 @@ function FavoritesItem({ entry }) {
     dispatch({ type: 'POST_CATEGORY', payload: newCategory });
     setDialogOpen(false);
   };
+<<<<<<< HEAD
+  
+  
+=======
 
   useEffect(() => dispatch({ type: 'GET_CATEGORIES' }), []);
+>>>>>>> 66702f8d73c442fe6e2b8b5fe648a9e11b6ea7df
 
   return (
     <>
@@ -104,6 +119,50 @@ function FavoritesItem({ entry }) {
             </IconButton>
           </CardActions>
         </Box>
+<<<<<<< HEAD
+      </CardActionArea>
+      <CardContent>
+        <Box minHeight={25}>
+          <Typography variant="body1" align="center">
+            {entry.name}
+          </Typography>
+        </Box>
+      </CardContent>
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <CardActions>
+          <Button color="primary" onClick={handleOpenMenu}>
+            Categories
+          </Button>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+          >
+            <MenuItem onClick={() => addCategoryToGif('')}>
+              <em>none</em>
+            </MenuItem>
+            {/* map over categoryList to display all categories as option items */}
+            {/* add Category only sends the id that corresponds to the name of the category in the DB */}
+            {categoryList.map((categoryItem) => {
+              return(
+                <MenuItem onClick={() => addCategoryToGif(categoryItem.id)}>{categoryItem.name}</MenuItem>
+              )
+            })}
+
+            {/* <MenuItem onClick={() => addCategoryToGif('funny')}>Funny</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('odd')}>Odd</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('cartoon')}>Cartoon</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('spicy')}>Spicy</MenuItem>
+            <MenuItem onClick={() => addCategoryToGif('meme')}>Meme</MenuItem> */}
+          </Menu>
+          <IconButton onClick={handleDelete}>
+            <DeleteOutline />
+          </IconButton>
+        </CardActions>
+      </Box>
+    </Card>
+=======
       </Card>
       <Dialog open={dialogOpen} onClose={addNewCategory}>
         <DialogTitle>Add New Category</DialogTitle>
@@ -119,6 +178,7 @@ function FavoritesItem({ entry }) {
         </DialogActions>
       </Dialog>
     </>
+>>>>>>> 66702f8d73c442fe6e2b8b5fe648a9e11b6ea7df
   );
 }
 
