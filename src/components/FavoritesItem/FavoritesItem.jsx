@@ -22,7 +22,6 @@ import { useEffect } from 'react';
 
 function FavoritesItem({ entry }) {
   const dispatch = useDispatch();
-  const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [newCategory, setNewCategory] = useState('');

@@ -21,7 +21,7 @@
     [x] favorites view (all on dom first)
       [x] display cards of favorited images
       [x] connected to table with image url's
-      [ ] select to give each favorite a category
+      [x] select to give each favorite a category
 
   [x] index.js
     [x] reducers
@@ -41,7 +41,7 @@
     [x] dotenv file
   [x] GET route for giphy should be complete
   [x] complete POST route to favorites table
-  [ ] complete PUT route to favorites table to assign category
+  [x] complete PUT route to favorites table to assign category
 
 
 # DB
